@@ -1,10 +1,12 @@
+USE SSBSInitiator
+GO
 -- =============================================
 -- Author:		<Zahra Saffarpour>
 -- Create date: <5/21/2023>
 -- Version:		<3.0.0.0>
 -- Description:	<>
 -- Input Parameters:
--- @TableName
+-- @TableName:
 -- @ColumnName:
 -- @IncludeClusteredIndex:
 -- @IncludeNonClusteredIndex:

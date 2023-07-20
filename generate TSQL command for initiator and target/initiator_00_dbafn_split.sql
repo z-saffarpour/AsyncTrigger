@@ -1,3 +1,5 @@
+USE SSBSInitiator
+GO
 -- =============================================  
 -- Author:  <Golchoobian>  
 -- Create date: <9/25/2013>  

@@ -1,3 +1,5 @@
+USE SSBSInitiator
+GO
 -- =============================================
 -- Author:		<Siavash Golchoobian>
 -- Create date: <6/24/2017>

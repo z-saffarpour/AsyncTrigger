@@ -1,3 +1,5 @@
+USE SSBSInitiator
+GO
 -- =============================================
 -- Author:		<Zahra Saffarpour>
 -- Create date: <5/21/2023>
@@ -5,7 +7,7 @@
 -- Description:	<Return list of related database names>
 -- Input Parameters:
 -- @SchemaName :
--- @TableName
+-- @TableName:
 -- @Columns:			'<ALL_COLUMNS>' or 'column_name1,column_name1,...,column_nameN' also you can use '<EXCLUDE:column_name1,column_name2,...,column_nameN>' and '<INCLUDE:column_name1,column_name2,...,column_nameN>' within only '<ALL_COLUMNS>' syntax 
 --							Ex:'<ALL_COLUMNS><INCLUDE:RECID,ModifiedDatetime><EXCLUDE:Partition,RecVersion>'
 -- @IncludeClusteredIndex:

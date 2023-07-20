@@ -1,10 +1,12 @@
+USE SSBSInitiator
+GO
 -- =============================================
 -- Author:		<Zahra Saffarpour>
 -- Create date: <5/21/2023>
 -- Version:		<3.0.0.0>
 -- Description:	<>
 -- Input Parameters:
--- @TableName
+-- @TableName:
 -- @ColumnName:
 -- @IncludeClusteredIndex:
 -- @IncludeNonClusteredIndex:
@@ -61,7 +63,7 @@ BEGIN
 	SET @myScript = N'';
 	SELECT @myScriptColumnType = @myScriptColumnType + N'	' + QUOTENAME( ColumnName ) + N' '
 								 + QUOTENAME(DataType)
-								 + CASE WHEN CharacterMaximumLength IS NOT NULL THEN CONCAT( '(', CharacterMaximumLength, ')' )ELSE '' END + N' '
+								 + CASE WHEN CharacterMaximumLength = -1 THEN '(MAX)' WHEN CharacterMaximumLength IS NOT NULL THEN CONCAT( '(', CharacterMaximumLength, ')' ) ELSE '' END + N' '
 								 + CASE WHEN IsNullable = 'NO' THEN 'NOT NULL' ELSE 'NULL' END + N',' + @NewLine
 	FROM @myColumnList
 
@@ -124,7 +126,7 @@ BEGIN
 	SET @myScriptColumnType = N'';
 	SELECT @myScriptColumnType = @myScriptColumnType + N'	    ' + QUOTENAME( ColumnName ) + N' '
 								 + QUOTENAME(DataType)
-								 + CASE WHEN CharacterMaximumLength IS NOT NULL THEN CONCAT( '(', CharacterMaximumLength, ')' )ELSE '' END + N' '
+								 + CASE WHEN CharacterMaximumLength = -1 THEN '(MAX)' WHEN CharacterMaximumLength IS NOT NULL THEN CONCAT( '(', CharacterMaximumLength, ')' ) ELSE '' END + N' '
 								 + CASE WHEN IsNullable = 'NO' THEN 'NOT NULL' ELSE 'NULL' END + N',' + @NewLine
 	FROM @myColumnList
 	SET @myScript = @myScript + N'CREATE OR ALTER PROCEDURE [ssbs].[proc_' + @myTableName + N']' + @NewLine;
@@ -145,7 +147,7 @@ BEGIN
 					+ STUFF(
 					  (
 						  SELECT ',' + N' [myData].[RECORD].value( ''' + ColumnName + N'[1]'', ''' + DataType
-								 + CASE WHEN CharacterMaximumLength IS NOT NULL THEN CONCAT( '(', CharacterMaximumLength, ')' )ELSE '' END + N''') AS '
+								 + CASE WHEN CharacterMaximumLength = -1 THEN '(MAX)' WHEN CharacterMaximumLength IS NOT NULL THEN CONCAT( '(', CharacterMaximumLength, ')' ) ELSE '' END + N''') AS '
 								 + ColumnName
 						  FROM @myColumnList
 						  FOR XML PATH( '' )
