@@ -16,6 +16,7 @@ CREATE OR ALTER   PROCEDURE ssbs.dbasp_create_initiator_object
 (
 	@TableName NVARCHAR(50),
 	@ColumnName NVARCHAR(MAX),
+	@ProcedureSendName NVARCHAR(128),
 	@IncludeClusteredIndex BIT = 1,
 	@IncludeNonClusteredIndex BIT = 0,
 	@EnableTrigger BIT = 0
@@ -84,7 +85,7 @@ BEGIN
 	SET @myScript = @myScript + N'                )' + @NewLine;
 	SET @myScript = @myScript + N'                FOR XML PATH( ''OKD365'' )' + @NewLine;
 	SET @myScript = @myScript + N'        );' + @NewLine;
-	SET @myScript = @myScript + N'    EXECUTE [ssbs].[proc_OperationalGeneralSend] @myMessage;' + @NewLine;
+	SET @myScript = @myScript + N'    EXECUTE [ssbs].[' + @ProcedureSendName + '] @myMessage;' + @NewLine;
 	SET @myScript = @myScript + N'END;' + @NewLine;
 	SET @myScript = @myScript + N'GO' + @NewLine;
 	EXECUTE ssbs.dbasp_print_text @myScript;
@@ -117,7 +118,7 @@ BEGIN
 	SET @myScript = @myScript + N'               )' + @NewLine;
 	SET @myScript = @myScript + N'        FOR XML PATH( ''OKD365'' )' + @NewLine;
 	SET @myScript = @myScript + N'    );' + @NewLine;
-	SET @myScript = @myScript + N'    EXECUTE [ssbs].[proc_OperationalGeneralSend] @myMessage;' + @NewLine;
+	SET @myScript = @myScript + N'    EXECUTE [ssbs].[' + @ProcedureSendName + '] @myMessage;' + @NewLine;
 	SET @myScript = @myScript + N'END;' + @NewLine;
 	SET @myScript = @myScript + N'GO' + @NewLine;
 	EXECUTE ssbs.dbasp_print_text @myScript;
@@ -150,7 +151,7 @@ BEGIN
 	SET @myScript = @myScript + N'               )' + @NewLine;
 	SET @myScript = @myScript + N'        FOR XML PATH( ''OKD365'' )' + @NewLine;
 	SET @myScript = @myScript + N'    );' + @NewLine;
-	SET @myScript = @myScript + N'    EXECUTE [ssbs].[proc_OperationalGeneralSend] @myMessage;' + @NewLine;
+	SET @myScript = @myScript + N'    EXECUTE [ssbs].[' + @ProcedureSendName + '] @myMessage;' + @NewLine;
 	SET @myScript = @myScript + N'END;' + @NewLine;
 	SET @myScript = @myScript + N'GO' + @NewLine;
 	EXECUTE ssbs.dbasp_print_text @myScript;
@@ -176,7 +177,7 @@ BEGIN
 	SET @myScript = @myScript + N'               )' + @NewLine;
 	SET @myScript = @myScript + N'        FOR XML PATH( ''OKD365'' )' + @NewLine;
 	SET @myScript = @myScript + N'    );' + @NewLine;
-	SET @myScript = @myScript + N'    EXECUTE [ssbs].[proc_OperationalGeneralSend] @myMessage;' + @NewLine;
+	SET @myScript = @myScript + N'    EXECUTE [ssbs].[' + @ProcedureSendName + '] @myMessage;' + @NewLine;
 	SET @myScript = @myScript + N'END;' + @NewLine;
 	SET @myScript = @myScript + N'GO' + @NewLine;
 	EXECUTE ssbs.dbasp_print_text @myScript;

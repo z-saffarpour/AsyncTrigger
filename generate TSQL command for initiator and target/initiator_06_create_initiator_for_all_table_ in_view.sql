@@ -9,7 +9,9 @@ GO
 -- @Object:
 -- =============================================
 DECLARE @Object NVARCHAR(128);
+DECLARE @ProcedureSendName NVARCHAR(128);
 SET @Object = N'dbo.LOGISTICSLOCATION';
+SET @ProcedureSendName = 'proc_OperationalGeneralSend';
 --====================
 DECLARE @RowCount INT;
 DECLARE @myTable AS TABLE ( ObjectName NVARCHAR(128), Type VARCHAR(10), TypDesc NVARCHAR(50), ParentName NVARCHAR(128), ObjectLevel INT );
@@ -63,7 +65,7 @@ BEGIN
     SET @myColumnName = N'<ALL_COLUMNS>';
     SET @myIncludeClusteredIndex = 1;
     SET @myIncludeNonClusteredIndex = 0;
-    EXECUTE ssbs.dbasp_create_initiator_object @TableName = @myTableName, @ColumnName = @myColumnName, @IncludeClusteredIndex = @myIncludeClusteredIndex, @IncludeNonClusteredIndex = @myIncludeNonClusteredIndex;
+    EXECUTE ssbs.dbasp_create_initiator_object @TableName = @myTableName, @ColumnName = @myColumnName, @ProcedureSendName = @ProcedureSendName, @IncludeClusteredIndex = @myIncludeClusteredIndex, @IncludeNonClusteredIndex = @myIncludeNonClusteredIndex;
     PRINT CONCAT( '--', REPLICATE( '=', 150 ));
     FETCH NEXT FROM myCursor INTO @myTableName;
 END;
