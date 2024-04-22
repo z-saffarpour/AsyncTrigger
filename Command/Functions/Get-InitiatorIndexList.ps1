@@ -14,7 +14,8 @@ function Get-InitiatorIndexList {
         INNER JOIN sys.columns AS myColumn ON myIndex.object_id = myColumn.object_id AND myColumn.column_id = myIndexColumn.column_id
         WHERE myIndexColumn.index_id = myIndex.index_id
               AND myIndexColumn.object_id = myIndex.object_id
-              AND myColumn.name NOT IN ( 'DATAAREAID', 'DATAAREA', 'PARTITION' )
+              --AND myColumn.name NOT IN ( 'DATAAREAID', 'DATAAREA', 'PARTITION' )`n
+              AND myColumn.name NOT IN ( 'PARTITION' )
         FOR XML PATH( '' )
     ), 1, 1, '' ) as IndexColumns`nFROM sys.indexes AS myIndex`nWHERE myIndex.object_id = OBJECT_ID('$($SchemaName).$($TableName)')"
 
